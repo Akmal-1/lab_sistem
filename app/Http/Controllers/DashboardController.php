@@ -3,16 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        $role = $user->roles->pluck('name')->first(); // Ambil nama role pertama user
-        
-        // Kirim role ke view
-        return view('dashboard', compact('role'));
+
+        // Pastikan pengguna memiliki setidaknya satu role
+        if (!$user || !$user->roles()->exists()) {
+            return redirect('/login')->withErrors(['role' => 'Role tidak ditemukan untuk user ini.']);
+        }
+
+        // Menggunakan accessor getFirstRoleAttribute untuk mendapatkan role pertama
+        $role = $user->firstRole;
+
+        // Pastikan role tidak null sebelum mengakses name
+        if ($role && $role->name == 'quality_control') {
+            return view('dashboard_parts.quality_control');
+        } elseif ($role && $role->name == 'operator_lab') {
+            return view('dashboard_parts.operator_lab');
+        }
+
+        return redirect('/login')->withErrors(['role' => 'Role tidak ditemukan atau tidak valid.']);
     }
 }
