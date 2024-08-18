@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth; // Tambahkan ini
 
 class RegisterController extends Controller
 {
+    // Tambahkan metode ini untuk menampilkan form registrasi
+    public function showRegistrationForm()
+    {
+        $roles = Role::all(); // Mengambil semua role untuk ditampilkan di form registrasi
+        return view('auth.register', compact('roles'));
+    }
+
     public function register(Request $request)
     {
         // Validasi input

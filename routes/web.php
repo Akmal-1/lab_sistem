@@ -1,36 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 
+// Route ke halaman welcome
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Route untuk halaman login
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
-// Untuk authconroller
-use App\Http\Controllers\Auth\AuthController;
-
-Route::get('login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-
-// Route untuk register
-use App\Http\Controllers\Auth\RegisterController;
-
-Route::get('register', function () {
-    return view('auth.register');
-})->name('register');
-
+// Route untuk halaman register
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
 
-
-// untuk dashboard
-use App\Http\Controllers\DashboardController;
-
+// Route untuk dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
