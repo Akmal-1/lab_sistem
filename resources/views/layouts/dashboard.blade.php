@@ -6,8 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ Auth::user()->roles()->first()->name ?? 'Dashboard' }} Dashboard</title>
-        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Hilangkan sementara link CSS dan JS untuk fokus pada kerangka -->
         @stack('css') <!-- Stack untuk menambahkan CSS khusus per role -->
     </head>
     
@@ -39,23 +38,22 @@
                     <div class="card-header">
                         Dashboard - {{ $roleName }}
                     </div>
+
+                    @if(session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="card-request">
                     <div class="card-body">
-                        @if(session('message'))
-                            <div class="alert alert-success">
-                                {{ session('message') }}
-                            </div>
-                        @endif
-                
                         @yield('content')
                     </div>
                 </div>
-            </div>
-        </div>        
+            </div>  
+        </div>
 
-        <script src="{{ asset('js/sample.js') }}"></script>
         @stack('scripts') <!-- Stack untuk menambahkan script JS khusus per role -->
     </body>
 </html>
