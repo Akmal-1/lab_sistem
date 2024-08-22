@@ -37,4 +37,10 @@ class User extends Authenticatable
     {
         return $this->roles()->first();
     }
+
+    // Fungsi untuk memeriksa apakah user memiliki role tertentu
+    public function hasRole($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->exists();
+    }
 }

@@ -14,40 +14,45 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    
     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-    
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
+
             $user = Auth::user();
-            $role = $user->roles()->first()->name; // Asumsi Anda sudah memiliki relasi many-to-many untuk roles
-    
+            $role = $user->roles()->first(); // Mengambil role pertama
+
+            if (!$role) {
+                // Jika user tidak memiliki role, arahkan ke halaman samples sebagai fallback
+                return redirect('/samples')->withErrors(['role' => 'Role tidak ditemukan untuk user ini.']);
+            }
+
+            $roleName = $role->name;
+
             // Tambahkan pesan sukses login
             Session::flash('message', 'Login berhasil! Selamat datang kembali.');
-    
+
             // Redirect berdasarkan role
-            switch ($role) {
+            switch ($roleName) {
                 case 'Quality Control':
-                    return redirect()->intended('/dashboard/quality_control');
-                case 'Operator Lab':
-                    return redirect()->intended('/dashboard/operator_lab');
-                // Tambahkan role lainnya
+                    return redirect()->intended('/samples');
+                case 'Analist':
+                    return redirect()->intended('/samples');
+                // Tambahkan role lainnya jika diperlukan
                 default:
-                    return redirect('/dashboard');
+                    return redirect('/samples'); // Arahkan ke halaman samples sebagai fallback
             }
         }
-    
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
-    
 
     public function logout(Request $request)
     {
@@ -59,4 +64,3 @@ class LoginController extends Controller
         return redirect('/login'); // Mengarahkan ke halaman login setelah logout
     }
 }
-

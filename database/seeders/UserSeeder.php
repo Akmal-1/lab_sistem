@@ -11,30 +11,30 @@ class UserSeeder extends Seeder
     public function run()
     {
         $roles = [
-            'admin_lab' => [
+            'Admin Lab' => [
                 ['name' => 'Admin Lab', 'email' => 'admin@lab.com']
             ],
-            'operator_lab' => [
-                ['name' => 'Operator 1', 'email' => 'operator1@lab.com'],
-                ['name' => 'Operator 2', 'email' => 'operator2@lab.com']
+            'Analist' => [
+                ['name' => 'Renal', 'email' => 'renal@lab.com'],
+                ['name' => 'Alpian', 'email' => 'alpian@lab.com']
             ],
-            'foreman_lab' => [
-                ['name' => 'Foreman Lab', 'email' => 'foreman@lab.com']
+            'Foreman Lab' => [
+                ['name' => 'Akmal', 'email' => 'akmal@lab.com']
             ],
-            'supervisor_lab' => [
-                ['name' => 'Supervisor Lab', 'email' => 'supervisor@lab.com']
+            'Supervisor Lab' => [
+                ['name' => 'Selfira', 'email' => 'selfira@lab.com']
             ],
-            'manager_lab' => [
-                ['name' => 'Manager Lab', 'email' => 'manager@lab.com']
+            'Manager' => [
+                ['name' => 'Arian reza', 'email' => 'arian.reza@lab.com']
             ],
-            'gm_lab' => [
-                ['name' => 'GM Lab', 'email' => 'gm@lab.com']
+            'General Manager' => [
+                ['name' => 'Andri', 'email' => 'andri@lab.com']
             ],
-            'quality_control' => [
-                ['name' => 'Quality Control 1', 'email' => 'qc1@lab.com'],
-                ['name' => 'Quality Control 2', 'email' => 'qc2@lab.com']
+            'Quality Control' => [
+                ['name' => 'Nikmat', 'email' => 'nikmat@lab.com'],
+                ['name' => 'Rudi', 'email' => 'rudi@lab.com']
             ],
-            'internal_customer' => [
+            'Internal Customer' => [
                 ['name' => 'Internal Customer 1', 'email' => 'customer1@lab.com'],
                 ['name' => 'Internal Customer 2', 'email' => 'customer2@lab.com']
             ]

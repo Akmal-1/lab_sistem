@@ -46,14 +46,15 @@
                 <label for="role">Role:</label>
                 <select id="role" name="role" required>
                     <option value="">Pilih Role</option>
-                    <option value="Operator Lab">Operator Lab</option>
-                    <option value="Admin">Admin</option>
+                    <option value="Admin Lab">Admin</option>
+                    <option value="Analist">Analist</option>
                     <option value="Foreman Lab">Foreman Lab</option>
                     <option value="Supervisor Lab">Supervisor Lab</option>
                     <option value="Manager">Manager</option>
                     <option value="General Manager">General Manager</option>
                     <option value="Quality Control">Quality Control</option>
                     <option value="Internal Customer">Internal Customer</option>
+                    <option value="Internal Customer">Guest</option>
                 </select>
             </div>
             <div class="form-group">

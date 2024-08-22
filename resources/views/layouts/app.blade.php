@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title') - My Application</title>
+
+    <!-- Menyertakan file CSS yang dihasilkan oleh Vite -->
+    @vite(['resources/css/app.css'])
+
+    <!-- Menyertakan Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Menyertakan partial untuk navbar -->
+    @include('partials.navbar')
+
+    <div class="container mt-4">
+        <!-- Menyertakan konten spesifik dari setiap halaman -->
+        @yield('content')
+    </div>
+
+    <!-- Menyertakan file JS yang dihasilkan oleh Vite -->
+    @vite(['resources/js/app.js', 'resources/js/form_request_analysis.js'])
+
+    <!-- Stack untuk skrip spesifik halaman -->
+    @stack('scripts')
+</body>
+</html>

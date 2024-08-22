@@ -1,51 +1,61 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Link ke file CSS -->
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <!-- Path gambar -->
-            <img src="{{ asset('images/PT-Timah-Industri.png') }}" alt="Company Logo">
-        </div>
-        <h2>Login</h2>
-        <form id="loginForm" method="POST" action="{{ route('login') }}">
-            @csrf
-            
-            <!-- Tambahkan blok kode ini untuk menampilkan pesan error -->
-            @if ($errors->any())
-                <div class="error-message">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">{{ __('Login') }}</div>
 
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="email" required>
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="form-group mb-3">
+                                <label for="email">{{ __('Email Address') }}</label>
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="password">{{ __('Password') }}</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn-login">Login</button>
-            </div>
-        </form>
-        <div class="options">
-            <a href="#" class="forgot-password">Lupa Password?</a>
-            <span class="separator">|</span>
-            <a href="{{ route('register') }}" class="register">Daftar</a>
         </div>
-        <div class="error-message" id="errorMessage"></div>
     </div>
 </body>
 </html>

@@ -9,6 +9,10 @@ class Role extends Model
 {
     use HasFactory;
 
+    // Menentukan atribut yang dapat diisi melalui mass assignment
+    protected $fillable = ['name'];
+
+    // Relasi many-to-many dengan User
     public function users()
     {
         return $this->belongsToMany(User::class);

@@ -1,0 +1,28 @@
+Langkah-Langkah Selanjutnya untuk Dashboard "Quality Control":
+Menyelesaikan Template Blade:
+
+Pastikan file view quality_control.blade.php memiliki struktur yang benar untuk menampilkan data yang relevan dengan peran "Quality Control".
+Ini termasuk tabel untuk "Request Analysis" dan tombol atau formulir yang diperlukan untuk tindakan seperti menambahkan, melihat, mengedit, dan menghapus sampel.
+Route & Controller:
+
+Pastikan metode index di DashboardController sudah benar dalam merouting pengguna dengan peran "Quality Control" ke tampilan Blade ini.
+Jika belum, pastikan route di file web.php sudah diarahkan dengan benar ke metode controller tersebut.
+Pengiriman Formulir & Validasi:
+
+Implementasikan formulir di quality_control.blade.php untuk pengiriman data "Request Analysis".
+Tambahkan validasi formulir yang diperlukan di dalam metode controller Anda untuk memastikan integritas data.
+Fungsionalitas CRUD untuk Sampel:
+
+Implementasikan operasi Create, Read, Update, Delete (CRUD) dasar untuk sampel di dalam dashboard "Quality Control".
+Fokuskan dulu pada penambahan sampel baru dan penampilan daftar sampel yang sudah ada. Anda bisa menambahkan fungsionalitas edit dan delete setelahnya.
+Penataan dengan Bootstrap:
+
+Pastikan layout menggunakan kelas-kelas Bootstrap untuk konsistensi gaya dan responsivitas. Karena Anda menggunakan Laravel 11, Anda bisa memanfaatkan Bootstrap bawaan yang sudah ada.
+Tambahkan CSS kustom di file terpisah jika diperlukan, namun sebaiknya tetap menggunakan Bootstrap untuk sebagian besar gaya.
+Pengujian:
+
+Uji pengiriman formulir, akses berbasis peran, dan fungsionalitas dasar untuk memastikan semuanya berjalan dengan baik.
+Kontrol Versi dengan Git:
+
+Commit progres Anda secara teratur ke Git untuk melacak perubahan yang telah Anda buat. Setelah Anda puas dengan dashboard "Quality Control", dorong (push) perubahan tersebut ke repository GitHub Anda.
+Apakah Anda ingin membahas langkah-langkah untuk mengatur operasi CRUD dan penanganan formulir "Request Analysis" dengan lebih detail?

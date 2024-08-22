@@ -10,13 +10,14 @@ class RoleSeeder extends Seeder
     public function run()
     {
         // Tambahkan role sesuai kebutuhan
-        Role::create(['name' => 'admin_lab']); 
-        Role::create(['name' => 'operator_lab']);
-        Role::create(['name' => 'foreman_lab']);
-        Role::create(['name' => 'supervisor_lab']);
-        Role::create(['name' => 'manager_lab']);
-        Role::create(['name' => 'gm_lab']);
-        Role::create(['name' => 'quality_control']);
-        Role::create(['name' => 'internal_customer']);
+        Role::create(['name' => 'Admin Lab']); 
+        Role::create(['name' => 'Analist']);
+        Role::create(['name' => 'Foreman Lab']);
+        Role::create(['name' => 'Supervisor Lab']);
+        Role::create(['name' => 'Manager']);
+        Role::create(['name' => 'General Manager']);
+        Role::create(['name' => 'Quality Control']);
+        Role::create(['name' => 'Internal Customer']);
+        Role::create(['name' => 'Guest']);
     }
 }
