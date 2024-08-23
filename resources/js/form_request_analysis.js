@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Mapping kategori sampel ke tipe sampel
     const tipeSampelOptions = {
-        "Raw Material": ["Raw Material 1", "Raw Material 2"],
-        "SnCl plant": ["SnCl 1", "SnCl 2"],
-        "Intermediate plant": ["DMT Line 1", "DMT Line 2", "DMT Mixing"],
-        "Methyltin stabilizer plant": ["MTS Reaksi akhir", "MTS Settle"],
-        "Tin Solder plant": ["Tin Solder 1", "Tin Solder 2"],
+        "Raw Material": ["Mecl", "2-EHTG", "Amonia", "DPDP", "Logam timah", "Tembaga murni", "Perak murni", "Nickel"],
+        "SnCl plant": ["SnCl4"],
+        "Intermediate plant": ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6", "Line 7", "Line 8", "DMT Mixing"],
+        "Methyltin stabilizer plant": ["Reaksi akhir", "Settle", "Drying", "Filtrasi", "Sirkulasi Storage", "Drumming (FG)"],
+        "Tin Solder plant": ["Tin Shot", "SnPb 6040", "Sn100C"],
         "Other": ["Other 1", "Other 2"],
     };
 
