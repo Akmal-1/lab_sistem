@@ -33,6 +33,15 @@ Route::middleware('auth')->group(function () {
     // Route untuk menampilkan form request analysis
     Route::get('/samples/create', [SamplesController::class, 'create'])->name('samples.create');
 
+    // Route untuk edit sample
+    Route::get('/samples/{id}/edit', [SamplesController::class, 'edit'])->name('samples.edit');
+
+    // Route untuk update sample
+    Route::put('/samples/{id}', [SamplesController::class, 'update'])->name('samples.update');
+
+    // Route untuk delete sample
+    Route::delete('/samples/{id}', [SamplesController::class, 'destroy'])->name('samples.destroy');
+
     // Route untuk halaman profile
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });

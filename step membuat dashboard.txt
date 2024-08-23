@@ -1,28 +1,34 @@
-Langkah-Langkah Selanjutnya untuk Dashboard "Quality Control":
-Menyelesaikan Template Blade:
-
-Pastikan file view quality_control.blade.php memiliki struktur yang benar untuk menampilkan data yang relevan dengan peran "Quality Control".
-Ini termasuk tabel untuk "Request Analysis" dan tombol atau formulir yang diperlukan untuk tindakan seperti menambahkan, melihat, mengedit, dan menghapus sampel.
-Route & Controller:
-
-Pastikan metode index di DashboardController sudah benar dalam merouting pengguna dengan peran "Quality Control" ke tampilan Blade ini.
-Jika belum, pastikan route di file web.php sudah diarahkan dengan benar ke metode controller tersebut.
-Pengiriman Formulir & Validasi:
-
-Implementasikan formulir di quality_control.blade.php untuk pengiriman data "Request Analysis".
-Tambahkan validasi formulir yang diperlukan di dalam metode controller Anda untuk memastikan integritas data.
-Fungsionalitas CRUD untuk Sampel:
-
-Implementasikan operasi Create, Read, Update, Delete (CRUD) dasar untuk sampel di dalam dashboard "Quality Control".
-Fokuskan dulu pada penambahan sampel baru dan penampilan daftar sampel yang sudah ada. Anda bisa menambahkan fungsionalitas edit dan delete setelahnya.
-Penataan dengan Bootstrap:
-
-Pastikan layout menggunakan kelas-kelas Bootstrap untuk konsistensi gaya dan responsivitas. Karena Anda menggunakan Laravel 11, Anda bisa memanfaatkan Bootstrap bawaan yang sudah ada.
-Tambahkan CSS kustom di file terpisah jika diperlukan, namun sebaiknya tetap menggunakan Bootstrap untuk sebagian besar gaya.
-Pengujian:
-
-Uji pengiriman formulir, akses berbasis peran, dan fungsionalitas dasar untuk memastikan semuanya berjalan dengan baik.
-Kontrol Versi dengan Git:
-
-Commit progres Anda secara teratur ke Git untuk melacak perubahan yang telah Anda buat. Setelah Anda puas dengan dashboard "Quality Control", dorong (push) perubahan tersebut ke repository GitHub Anda.
-Apakah Anda ingin membahas langkah-langkah untuk mengatur operasi CRUD dan penanganan formulir "Request Analysis" dengan lebih detail?
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\xampp\htdocs\lab_sistem> git add .
+warning: in the working copy of 'resources/css/app.css', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/dashboard/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/layouts/app.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/partials/navbar.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/samples/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/samples/index.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'step membuat dashboard.txt', CRLF will be replaced by LF the next time Git touches it
+PS C:\xampp\htdocs\lab_sistem> git commit -m "Update proyek: Menambahkan fitur form request analisa sampel, memperbarui layout, dan merapikan struktur file"
+[main 4d1b615] Update proyek: Menambahkan fitur form request analisa sampel, memperbarui layout, dan merapikan struktur file
+ 34 files changed, 1670 insertions(+), 260 deletions(-)
+ create mode 100644 app/Http/Controllers/SamplesController.php
+ create mode 100644 app/Models/AnalysisResult.php
+ create mode 100644 app/Models/Sample.php
+ create mode 100644 database/migrations/2024_08_21_184725_create_samples_table.php
+ create mode 100644 package-lock.json
+ rename {resources => public}/js/bootstrap.js (100%)
+ delete mode 100644 public/js/sample.js
+ rename {public => resources}/css/login.css (100%)
+ rename {public => resources}/css/register.css (100%)
+ rename {public => resources}/images/Bg_Content.png (100%)
+ rename {public => resources}/images/PT-Timah-Industri.png (100%)
+ create mode 100644 resources/js/form_request_analysis.js
+ create mode 100644 resources/views/dashboard/index.blade.php
+ create mode 100644 resources/views/dashboard/quality_control.blade.php
+ delete mode 100644 resources/views/dashboard_parts/quality_control.blade.php
+ create mode 100644 resources/views/layouts/app.blade.php
+ delete mode 100644 resources/views/layouts/dashboard.blade.php
+ create mode 100644 resources/views/partials/navbar.blade.php
+ create mode 100644 resources/views/samples/create.blade.php
+ create mode 100644 resources/views/samples/index.blade.php
+ create mode 100644 step membuat dashboard.txt
+PS C:\xampp\htdocs\lab_sistem> git status

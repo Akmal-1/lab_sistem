@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function() {
             <td><input type="text" name="deskripsi[]" class="form-control" placeholder="Masukkan Deskripsi"></td>
             <td><input type="text" name="pemohon[]" class="form-control" placeholder="Masukkan nama" required></td>
             <td class="button-action">
-                <button type="button" class="btn btn-warning edit"><i class="fas fa-edit"></i></button>
                 <button type="button" class="btn btn-success save"><i class="fas fa-save"></i></button>
+                <button type="button" class="btn btn-warning edit" style="display:none;"><i class="fas fa-edit"></i></button>
                 <button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
             </td>
         `;
@@ -84,6 +84,34 @@ document.addEventListener("DOMContentLoaded", function() {
             // Mengisi dropdown tipe sampel dengan opsi yang sesuai
             tipeSampelSelect.innerHTML = `<option value="" disabled selected>Pilih Tipe Sampel</option>${tipeSampelOptionsHtml}`;
         });
+    });
+
+    // Event listener untuk menyimpan perubahan pada baris
+    sampleTableBody.addEventListener("click", function(event) {
+        const saveButton = event.target.closest(".save");
+        if (saveButton) {
+            const row = saveButton.closest("tr");
+            const inputs = row.querySelectorAll("input, select");
+
+            // Ubah input menjadi tidak bisa diubah setelah disimpan
+            inputs.forEach(input => input.setAttribute("disabled", "disabled"));
+            saveButton.style.display = "none";
+            row.querySelector(".edit").style.display = "inline-block";
+        }
+    });
+
+    // Event listener untuk mengedit baris
+    sampleTableBody.addEventListener("click", function(event) {
+        const editButton = event.target.closest(".edit");
+        if (editButton) {
+            const row = editButton.closest("tr");
+            const inputs = row.querySelectorAll("input, select");
+
+            // Ubah input menjadi bisa diubah ketika mengedit
+            inputs.forEach(input => input.removeAttribute("disabled"));
+            editButton.style.display = "none";
+            row.querySelector(".save").style.display = "inline-block";
+        }
     });
 
     // Event listener untuk menghapus baris

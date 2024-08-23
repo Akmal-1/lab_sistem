@@ -46,5 +46,5 @@
 
 @push('scripts')
     <!-- Menyertakan file JavaScript untuk mengatur form request analisa -->
-    <script src="{{ asset('resources/js/form_request_analysis.js') }}"></script>
+    @vite(['resources/js/form_request_analysis.js'])
 @endpush

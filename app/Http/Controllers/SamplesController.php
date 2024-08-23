@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sample;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SamplesController extends Controller
 {
@@ -51,5 +52,67 @@ class SamplesController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect()->route('samples.index')->with('success', 'Sample berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        // Menemukan sample berdasarkan ID
+        $sample = Sample::findOrFail($id);
+        return view('samples.edit', compact('sample'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi data input dari form
+        $request->validate([
+            'date' => 'required|date',
+            'kategori_sampel' => 'required|string|in:Raw Material,SnCl plant,Intermediate plant,Methyltin stabilizer plant,Tin Solder plant,Other',
+            'tipe_sampel' => 'required|string',
+            'batch_lot' => 'nullable|string',
+            'deskripsi' => 'nullable|string',
+            'pemohon' => 'required|string',
+            'reason' => 'required|string', // Alasan perubahan wajib diisi
+        ]);
+
+        // Menggunakan transaksi untuk memastikan semua data tersimpan dengan benar
+        DB::transaction(function () use ($request, $id) {
+            $sample = Sample::findOrFail($id);
+            $sample->update($request->all());
+
+            // Menambahkan audit trail
+            Log::info('Sample updated', [
+                'user_id' => auth()->user()->id,
+                'sample_id' => $sample->id,
+                'changes' => $request->all(),
+                'reason' => $request->input('reason'),
+            ]);
+        });
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('samples.index')->with('success', 'Sample berhasil diupdate.');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        // Validasi alasan penghapusan
+        $request->validate([
+            'reason' => 'required|string', // Alasan penghapusan wajib diisi
+        ]);
+
+        // Menggunakan transaksi untuk memastikan data terhapus dengan benar
+        DB::transaction(function () use ($request, $id) {
+            $sample = Sample::findOrFail($id);
+            $sample->delete();
+
+            // Menambahkan audit trail
+            Log::info('Sample deleted', [
+                'user_id' => auth()->user()->id,
+                'sample_id' => $sample->id,
+                'reason' => $request->input('reason'),
+            ]);
+        });
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('samples.index')->with('success', 'Sample berhasil dihapus.');
     }
 }

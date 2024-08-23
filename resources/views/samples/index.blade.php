@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Sample Requests') {{-- Menentukan judul halaman --}}
+@section('title', 'Sample Requests') 
+{{-- Menentukan judul halaman --}}
 
 @section('content')
-    <h3>Permintaan analisa</h3> {{-- Judul utama halaman --}}
+    <h3>Permintaan analisa</h3> 
+    {{-- Judul utama halaman --}}
 
     <!-- Menampilkan pesan sukses -->
     @if(session('success'))
@@ -11,7 +13,8 @@
     @endif
 
     <!-- Tombol untuk menuju ke halaman pembuatan request baru -->
-    <a href="{{ route('samples.create') }}" class="btn btn-primary mb-3">Buat permintaan analisa sampel</a> {{-- Tombol untuk membuat permintaan baru --}}
+    <a href="{{ route('samples.create') }}" class="btn btn-primary mb-3">Buat permintaan analisa sampel</a> 
+    {{-- Tombol untuk membuat permintaan baru --}}
 
     <!-- Cek apakah ada data samples -->
     @if($samples->count() > 0)
@@ -36,13 +39,42 @@
                         <td>{{ $sample->deskripsi }}</td>
                         <td>{{ $sample->pemohon }}</td>
                         <td>
-                            <!-- Tindakan edit dan delete bisa ditambahkan di sini -->
+                            <a href="{{ route('samples.edit', $sample->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Trigger Modal -->
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $sample->id }}">
+                                Delete
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal-{{ $sample->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel-{{ $sample->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel-{{ $sample->id }}">Delete Sample</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('samples.destroy', $sample->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="form-group">
+                                                    <label for="reason-{{ $sample->id }}">Reason for deletion</label>
+                                                    <input type="text" id="reason-{{ $sample->id }}" name="reason" class="form-control" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Modal -->
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @else
-        <p>Tidak ada permintaan analisa sampel.</p> {{-- Pesan yang ditampilkan jika tidak ada data --}}
+        <p>Tidak ada permintaan analisa sampel.</p> 
+        {{-- Pesan yang ditampilkan jika tidak ada data --}}
     @endif
 @endsection
