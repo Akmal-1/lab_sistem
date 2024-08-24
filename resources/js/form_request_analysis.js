@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const row = saveButton.closest("tr");
             const inputs = row.querySelectorAll("input, select");
 
-            // Ubah input menjadi tidak bisa diubah setelah disimpan
-            inputs.forEach(input => input.setAttribute("disabled", "disabled"));
+            // Ubah input menjadi readonly setelah disimpan
+            inputs.forEach(input => input.setAttribute("readonly", "readonly"));
             saveButton.style.display = "none";
             row.querySelector(".edit").style.display = "inline-block";
         }
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const inputs = row.querySelectorAll("input, select");
 
             // Ubah input menjadi bisa diubah ketika mengedit
-            inputs.forEach(input => input.removeAttribute("disabled"));
+            inputs.forEach(input => input.removeAttribute("readonly"));
             editButton.style.display = "none";
             row.querySelector(".save").style.display = "inline-block";
         }

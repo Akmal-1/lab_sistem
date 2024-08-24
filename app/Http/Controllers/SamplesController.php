@@ -36,22 +36,32 @@ class SamplesController extends Controller
             'pemohon.*' => 'required|string',
         ]);
 
-        // Menggunakan transaksi untuk memastikan semua data tersimpan dengan benar
-        DB::transaction(function () use ($request) {
-            foreach ($request->date as $index => $date) {
-                Sample::create([
-                    'date' => $date,
-                    'kategori_sampel' => $request->kategori_sampel[$index], // Menyimpan kategori sampel
-                    'tipe_sampel' => $request->tipe_sampel[$index],
-                    'batch_lot' => $request->batch_lot[$index],
-                    'deskripsi' => $request->deskripsi[$index],
-                    'pemohon' => $request->pemohon[$index],
-                ]);
-            }
-        });
+        try {
+            // Menggunakan transaksi untuk memastikan semua data tersimpan dengan benar
+            DB::transaction(function () use ($request) {
+                foreach ($request->date as $index => $date) {
+                    Sample::create([
+                        'date' => $date,
+                        'kategori_sampel' => $request->kategori_sampel[$index],
+                        'tipe_sampel' => $request->tipe_sampel[$index],
+                        'batch_lot' => $request->batch_lot[$index],
+                        'deskripsi' => $request->deskripsi[$index],
+                        'pemohon' => $request->pemohon[$index],
+                        'status' => 'Dalam Antrian', // Menambahkan status awal
+                    ]);
+                }
+            });
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('samples.index')->with('success', 'Sample berhasil ditambahkan.');
+            // Redirect dengan pesan sukses
+            return redirect()->route('samples.index')->with('success', 'Sample berhasil ditambahkan.');
+
+        } catch (\Exception $e) {
+            // Logging error untuk keperluan debugging jika terjadi masalah
+            Log::error('Error saving samples: ' . $e->getMessage());
+
+            // Redirect kembali dengan pesan error
+            return back()->withErrors('Terjadi kesalahan saat menyimpan sampel. Silakan coba lagi.');
+        }
     }
 
     public function edit($id)
@@ -72,24 +82,34 @@ class SamplesController extends Controller
             'deskripsi' => 'nullable|string',
             'pemohon' => 'required|string',
             'reason' => 'required|string', // Alasan perubahan wajib diisi
+            'status' => 'required|string|in:Dalam Antrian,Sampel Sedang Dikerjakan,Selesai' // Menambahkan validasi status
         ]);
 
-        // Menggunakan transaksi untuk memastikan semua data tersimpan dengan benar
-        DB::transaction(function () use ($request, $id) {
-            $sample = Sample::findOrFail($id);
-            $sample->update($request->all());
+        try {
+            // Menggunakan transaksi untuk memastikan semua data tersimpan dengan benar
+            DB::transaction(function () use ($request, $id) {
+                $sample = Sample::findOrFail($id);
+                $sample->update($request->all());
 
-            // Menambahkan audit trail
-            Log::info('Sample updated', [
-                'user_id' => auth()->user()->id,
-                'sample_id' => $sample->id,
-                'changes' => $request->all(),
-                'reason' => $request->input('reason'),
-            ]);
-        });
+                // Menambahkan audit trail
+                Log::info('Sample updated', [
+                    'user_id' => auth()->user()->id,
+                    'sample_id' => $sample->id,
+                    'changes' => $request->all(),
+                    'reason' => $request->input('reason'),
+                ]);
+            });
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('samples.index')->with('success', 'Sample berhasil diupdate.');
+            // Redirect dengan pesan sukses
+            return redirect()->route('samples.index')->with('success', 'Sample berhasil diupdate.');
+
+        } catch (\Exception $e) {
+            // Logging error untuk keperluan debugging jika terjadi masalah
+            Log::error('Error updating sample: ' . $e->getMessage());
+
+            // Redirect kembali dengan pesan error
+            return back()->withErrors('Terjadi kesalahan saat mengupdate sampel. Silakan coba lagi.');
+        }
     }
 
     public function destroy(Request $request, $id)
@@ -99,20 +119,29 @@ class SamplesController extends Controller
             'reason' => 'required|string', // Alasan penghapusan wajib diisi
         ]);
 
-        // Menggunakan transaksi untuk memastikan data terhapus dengan benar
-        DB::transaction(function () use ($request, $id) {
-            $sample = Sample::findOrFail($id);
-            $sample->delete();
+        try {
+            // Menggunakan transaksi untuk memastikan data terhapus dengan benar
+            DB::transaction(function () use ($request, $id) {
+                $sample = Sample::findOrFail($id);
+                $sample->delete();
 
-            // Menambahkan audit trail
-            Log::info('Sample deleted', [
-                'user_id' => auth()->user()->id,
-                'sample_id' => $sample->id,
-                'reason' => $request->input('reason'),
-            ]);
-        });
+                // Menambahkan audit trail
+                Log::info('Sample deleted', [
+                    'user_id' => auth()->user()->id,
+                    'sample_id' => $sample->id,
+                    'reason' => $request->input('reason'),
+                ]);
+            });
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('samples.index')->with('success', 'Sample berhasil dihapus.');
+            // Redirect dengan pesan sukses
+            return redirect()->route('samples.index')->with('success', 'Sample berhasil dihapus.');
+
+        } catch (\Exception $e) {
+            // Logging error untuk keperluan debugging jika terjadi masalah
+            Log::error('Error deleting sample: ' . $e->getMessage());
+
+            // Redirect kembali dengan pesan error
+            return back()->withErrors('Terjadi kesalahan saat menghapus sampel. Silakan coba lagi.');
+        }
     }
 }

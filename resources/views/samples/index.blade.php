@@ -26,6 +26,7 @@
                     <th>Batch/Lot</th>
                     <th>Deskripsi</th>
                     <th>Pemohon</th>
+                    <th>Status</th> {{-- Kolom Status --}}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -38,6 +39,7 @@
                         <td>{{ $sample->batch_lot }}</td>
                         <td>{{ $sample->deskripsi }}</td>
                         <td>{{ $sample->pemohon }}</td>
+                        <td>{{ $sample->status }}</td> {{-- Menampilkan Status --}}
                         <td>
                             <a href="{{ route('samples.edit', $sample->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <!-- Trigger Modal -->
