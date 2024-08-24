@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 </head>
 <body>
     <div class="container">
@@ -54,7 +54,7 @@
                     <option value="General Manager">General Manager</option>
                     <option value="Quality Control">Quality Control</option>
                     <option value="Internal Customer">Internal Customer</option>
-                    <option value="Internal Customer">Guest</option>
+                    <option value="Guest">Guest</option> <!-- Perbaikan: ubah value ke "Guest" -->
                 </select>
             </div>
             <div class="form-group">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session; // Tambahkan ini
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -28,14 +28,12 @@ class LoginController extends Controller
             $role = $user->roles()->first(); // Mengambil role pertama
 
             if (!$role) {
-                // Jika user tidak memiliki role, arahkan ke halaman samples sebagai fallback
                 return redirect('/samples')->withErrors(['role' => 'Role tidak ditemukan untuk user ini.']);
             }
 
             $roleName = $role->name;
 
-            // Tambahkan pesan sukses login
-            Session::flash('message', 'Login berhasil! Selamat datang kembali.');
+            Session::flash('message', 'Login berhasil! Selamat datang kembali.'); // Tambahkan pesan sukses login
 
             // Redirect berdasarkan role
             switch ($roleName) {
