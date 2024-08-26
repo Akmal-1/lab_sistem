@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('/images/Bg_Content.png'); /* Path ke gambar yang benar */
+    background-image: url('/images/Bg_Content.svg'); /* Path ke gambar yang benar */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

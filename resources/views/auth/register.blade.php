@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="{{ asset('images/PT-Timah-Industri.png') }}" alt="Company Logo">
+            <img src="{{ asset('images/PT-Timah-Industri.svg') }}" alt="Company Logo">
         </div>
         <h2>Register</h2>
         <form id="registerForm" method="POST" action="{{ route('register') }}">

@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="{{ asset('images/PT-Timah-Industri.png') }}" alt="Company Logo">
+            <img src="{{ asset('images/PT-Timah-Industri.svg') }}" alt="Company Logo">
         </div>
         <h2>Login</h2> <!-- Konsistensi dengan halaman register -->
         <form method="POST" action="{{ route('login') }}">
